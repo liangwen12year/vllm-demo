@@ -15,6 +15,18 @@ Mock metrics server + Prometheus + Grafana stack for developing vLLM observabili
 | vLLM Native Prometheus | `:8000` | `vllm:request_success_total`, `vllm:time_to_first_token_seconds`, `vllm:num_requests_running` |
 | DCGM Exporter | `:9400` | `DCGM_FI_DEV_GPU_UTIL`, `DCGM_FI_DEV_FB_USED`, `DCGM_FI_DEV_POWER_USAGE` |
 
+## Dashboard Preview
+
+![Grafana Dashboard](docs/grafana-dashboard.png)
+
+| Row | Section | Source |
+|-----|---------|--------|
+| 1 | Request Latency | vLLM Native Prometheus |
+| 2 | Throughput & Queue | vLLM Native Prometheus |
+| 3 | KV Cache | vLLM Native Prometheus |
+| 4 | GPU (DCGM Exporter) | DCGM Exporter |
+| 5 | Request Details | vLLM Native Prometheus |
+
 ## Quick start
 
 ```bash
