@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  prometheus:
+    image: docker.io/prom/prometheus:latest
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "9091:9090"
+    volumes:
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yml:z
+
+  grafana:
+    image: docker.io/grafana/grafana:latest
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:z
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:z
